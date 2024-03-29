@@ -1,8 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 import numpy as np
-import pandas
 import sklearn
-import pickle
 
 model = pickle.load(open('model.pkl','rb'))
 sc = pickle.load(open('standscaler.pkl','rb'))
