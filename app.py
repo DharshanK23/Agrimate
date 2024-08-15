@@ -37,6 +37,10 @@ def logon():
 def forgot():
     return render_template("forgotpassword.html")
 
+@app.route('/reset')
+def reset():
+    return render_template("resetpassword.html")
+
 @app.route('/logout')
 def logout():
     return render_template("fakehome.html")
