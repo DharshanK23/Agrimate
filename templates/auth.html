@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +14,7 @@
             box-sizing: border-box;
             font-family: sans-serif;
         }
+
         body {
             width: 100vw;
             height: 100vh;
@@ -22,7 +24,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
+
+        #google_translate_element {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.568);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
         .container {
             width: 400px;
             height: 500px;
@@ -36,20 +49,19 @@
             border-radius: 20px;
             border: 3px solid rgba(255, 255, 255, 0.5);
         }
+
         h2 {
             color: #ffff;
             font-size: 2em;
-            text-transform: uppercase;
-            padding: 20px 0;
         }
-    
+
         .form-group {
             position: relative;
             width: 330px;
             margin: 30px 0;
             border-bottom: 3px solid #ffff;
         }
-    
+
         .form-group input {
             width: 100%;
             height: 50px;
@@ -60,19 +72,20 @@
             outline: none;
             color: #fff;
         }
-    
+
         .form-group label {
             font-size: 1.2em;
             color: #fff;
             transition: 0.5s;
-            text-align: left; /* Align label text to the left */
+            text-align: left;
+            /* Align label text to the left */
         }
-    
+
         input:focus~label,
         input:valid~label {
             top: -5px;
         }
-    
+
         .form-group i {
             position: absolute;
             top: 50%;
@@ -82,59 +95,65 @@
             font-size: 1.2em;
             cursor: pointer;
         }
-    
+
         p {
             text-align: center;
             color: #fff;
             margin: 10px 0;
         }
-    
+
         p>a {
             text-decoration: none;
             color: #fff;
             font-weight: 600;
         }
-    
+
         p>a:hover {
             text-decoration: underline;
             font-style: italic;
         }
-    
-        #register{
+
+        #register {
             width: 100%;
             height: 50px;
-            border-radius: 40px;
+            border-radius: 10px;
             border: none;
-            font-size: 1.5em;
-            text-transform: uppercase;
-            font-weight: 600;
+            font-size: 1.3em;
+            font-weight: 550;
             margin: 10px 0;
             cursor: pointer;
             transition: all 0.5s;
         }
-    
+
         #register:hover {
             background: rgba(0, 0, 0, 0.3);
             color: #fff;
         }
+
+        .form-group input::placeholder {
+            color: #ffffff3f;
+        }
     </style>
-    
+
 </head>
-<body> 
-    <div class="container">    
-        <div id="google_translate_element"></div> 
+
+<body>
+    <div id="google_translate_element"></div>
+    <div class="container">
+        <h2>Register</h2>
         <form name="registration_form" id="registration_form" method="post" action="#" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" >
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-group">
-                            <input type="password" name="login_password" id="login_password" class="form-control" placeholder="Enter your password">
+                            <input type="password" name="login_password" id="login_password" class="form-control"
+                                placeholder="Enter your password">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="togglePassword"></i>
@@ -142,8 +161,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" id="register" name="register" class="btn btn-success">Register</button>
-                    <p>Registered User? <a href="/login">Login</a></p>
+                    <button type="button" id="register" name="register" class="btn btn-success">Sign Up</button>
+                    <p><a href="/login">Existing User? Click here</a></p>
                 </div>
             </div>
         </form>
@@ -154,33 +173,34 @@
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     const firebaseConfig = {
-  apiKey: "AIzaSyAq_Z-B8BrOm6fTNPRSVXX7_QHQSJIDnmw",
-  authDomain: "login-with-firebase-data-5cef4.firebaseapp.com",
-  databaseURL: "https://login-with-firebase-data-5cef4-default-rtdb.firebaseio.com",
-  projectId: "login-with-firebase-data-5cef4",
-  storageBucket: "login-with-firebase-data-5cef4.appspot.com",
-  messagingSenderId: "932267970494",
-  appId: "1:932267970494:web:d02b5a00f4b0e547f8b3ef"
-};
+        apiKey: "AIzaSyAq_Z-B8BrOm6fTNPRSVXX7_QHQSJIDnmw",
+        authDomain: "login-with-firebase-data-5cef4.firebaseapp.com",
+        databaseURL: "https://login-with-firebase-data-5cef4-default-rtdb.firebaseio.com",
+        projectId: "login-with-firebase-data-5cef4",
+        storageBucket: "login-with-firebase-data-5cef4.appspot.com",
+        messagingSenderId: "932267970494",
+        appId: "1:932267970494:web:d02b5a00f4b0e547f8b3ef"
+    };
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const auth = getAuth();
-    
-    document.getElementById("register").addEventListener("click", function() {
-        var email =  document.getElementById("email").value;
+
+    document.getElementById("register").addEventListener("click", function () {
+        var email = document.getElementById("email").value;
         var password = document.getElementById("login_password").value;
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-            alert("Registration successful!");
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            console.log(errorMessage);
-            alert(errorMessage);
-        });		  
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                alert("Registration successful!");
+                window.location.href = "/login";
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                alert(errorMessage);
+            });
     });
     document.getElementById('togglePassword').addEventListener('click', function () {
         const passwordInput = document.getElementById('login_password');
@@ -190,12 +210,14 @@
     });
 </script>
 <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-                {pageLanguage: 'en'},
-                'google_translate_element'
-            );
-        } 
-  </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            { pageLanguage: 'en' },
+            'google_translate_element'
+        );
+    } 
+</script>
+<script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </html>
