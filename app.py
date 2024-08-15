@@ -33,6 +33,10 @@ def index():
 def logon():
     return render_template("login.html")
 
+@app.route('/forgot')
+def forgot():
+    return render_template("forgotpassword.html")
+
 @app.route('/logout')
 def logout():
     return render_template("fakehome.html")
